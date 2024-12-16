@@ -38,10 +38,11 @@ app.post("/generate", async (request, response) => {
     const options = {
         method: 'GET',
         headers: {
-          'x-rapidapi-key': '07a9bcbc84mshe08ffc46e1b10cep14aaecjsnef4af9f67c17',
-          'x-rapidapi-host': 'quotes88.p.rapidapi.com'
+            'x-rapidapi-key': '09670065damsh7965ee9c648283bp12c7ddjsn7bd5813a2f85',
+            'x-rapidapi-host': 'quotes88.p.rapidapi.com'
         }
-    };      
+    };
+   
     let quoteUrl = "";
 
     if (rand == "on")
