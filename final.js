@@ -95,11 +95,7 @@ app.get("/savedQuotes", async (request, response) => {
     } 
 });
 
-app.get("/clearHistory", (request, response) => {
-    response.render("clearHistory", {portNumber: portNumber});
-}); 
-
-app.post("/clearHistory", async (request, response) => { 
+app.get("/clearConfirm", async (request, response) => {
     const client = new MongoClient(uri, { serverApi: ServerApiVersion.v1 });
     try {
         await client.connect();
@@ -113,24 +109,24 @@ app.post("/clearHistory", async (request, response) => {
         await client.close();
         response.end();
     }
-});
+}); 
 
 app.listen(portNumber);
 
-const prompt = "Stop to shutdown the server:  ";
-process.stdout.write(prompt);
-process.stdin.on("readable", function () {
+// const prompt = "Stop to shutdown the server:  ";
+// process.stdout.write(prompt);
+// process.stdin.on("readable", function () {
 
-  const dataInput = process.stdin.read();
-  if (dataInput !== null) {
-    const command = dataInput.trim();
-    if (command.toLowerCase() === "stop") {
-      process.stdout.write("Shutting down the server\n");
-      process.exit(0);
-    } else {
-      process.stdout.write(`Invalid Command: ${dataInput}`);
-    }
-    process.stdout.write(prompt);
-    process.stdin.resume();
-  }
-});
+//   const dataInput = process.stdin.read();
+//   if (dataInput !== null) {
+//     const command = dataInput.trim();
+//     if (command.toLowerCase() === "stop") {
+//       process.stdout.write("Shutting down the server\n");
+//       process.exit(0);
+//     } else {
+//       process.stdout.write(`Invalid Command: ${dataInput}`);
+//     }
+//     process.stdout.write(prompt);
+//     process.stdin.resume();
+//   }
+// });
