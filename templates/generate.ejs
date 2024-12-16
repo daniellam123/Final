@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Final</title>
+</head>
+
+<body>
+	<h1>Generate a Quote</h1>
+	<form action="http://localhost:<%- portNumber %>/generate" method="post">
+		<fieldset>   
+			<label>Random: <input type="checkbox" name="rand"></label><br>
+			<label><strong>ID: </strong><input type="text" name="id"></label>
+		</fieldset>
+
+		<br>
+		<input type="reset" />
+		<input type="submit" value="Submit"/>
+	</form>
+    <hr>
+    <a href="/">HOME</a>
+</body>
+
+</html>
