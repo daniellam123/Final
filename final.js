@@ -78,7 +78,6 @@ app.get("/savedQuotes", async (request, response) => {
             }
             quotes += `</ul>`
             response.render("saved", {quotes});   
-            console.log(result); 
         } else {
             response.render("saved", {quotes: "NONE"});    
         }
@@ -110,23 +109,23 @@ app.post("/removeAll", async (request, response) => {
     }
 });
 
-// app.listen(portNumber);
-// console.log(`Webserver started and running at http://localhost:${portNumber}`);
+app.listen(portNumber);
+console.log(`Webserver started and running at http://localhost:${portNumber}`);
 
-// const prompt = "Stop to shutdown the server:  ";
-// process.stdout.write(prompt);
-// process.stdin.on("readable", function () {
+const prompt = "Stop to shutdown the server:  ";
+process.stdout.write(prompt);
+process.stdin.on("readable", function () {
 
-//   const dataInput = process.stdin.read();
-//   if (dataInput !== null) {
-//     const command = dataInput.trim();
-//     if (command.toLowerCase() === "stop") {
-//       process.stdout.write("Shutting down the server\n");
-//       process.exit(0);
-//     } else {
-//       process.stdout.write(`Invalid Command: ${dataInput}`);
-//     }
-//     process.stdout.write(prompt);
-//     process.stdin.resume();
-//   }
-// });
+  const dataInput = process.stdin.read();
+  if (dataInput !== null) {
+    const command = dataInput.trim();
+    if (command.toLowerCase() === "stop") {
+      process.stdout.write("Shutting down the server\n");
+      process.exit(0);
+    } else {
+      process.stdout.write(`Invalid Command: ${dataInput}`);
+    }
+    process.stdout.write(prompt);
+    process.stdin.resume();
+  }
+});
