@@ -2,10 +2,10 @@ Submitted by: Daniel Lam (directory id: dlam123)
 
 Group Members: Daniel Lam (dlam123)
 
-App Description: Allow users to generate quotes and stores the results
+App Description: Allows users to generate quotes and stores history of quotes
 
-YouTube Video Demo Link: (https://youtu.be/CdgrCto7izY?feature=shared)
+YouTube Video Link: (https://youtu.be/CdgrCto7izY?feature=shared)
 
-APIs Information: Quotes (https://quotes88.p.rapidapi.com/)
+APIs: Quotes88 (https://quotes88.p.rapidapi.com/)
 
 Contact Email: dlam123@terpmail.umd.edu
