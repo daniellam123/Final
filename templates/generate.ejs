@@ -4,20 +4,37 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Final</title>
+    <style>
+		h1 {
+			display: inline;
+			border: 1px dotted black;
+			padding: 5px;
+		}
+	
+		a:hover {
+			font-size: 1.2rem;
+		}
+	
+		body {
+			background-color: aliceblue;
+		}
+	</style>
 </head>
 
 <body>
 	<h1>Generate a Quote</h1>
-	<form action="http://localhost:<%- portNumber %>/generate" method="post">
-		<fieldset>   
-			<label>Random: <input type="checkbox" name="rand"></label><br>
-			<label><strong>ID: </strong><input type="text" name="id"></label>
-		</fieldset>
-
+	<br>
+	<br>
+	<form action="/generate" method="post">
+		<label><strong>Random: </strong><input type="checkbox" name="rand"></label><br>
+		<label><strong>ID: </strong><input type="text" name="id"></label>
+		(Not all IDs work. Enter number greater than 3.)
+		<br>
 		<br>
 		<input type="reset" />
 		<input type="submit" value="Submit"/>
 	</form>
+
     <hr>
     <a href="/">HOME</a>
 </body>

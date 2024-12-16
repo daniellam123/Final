@@ -42,13 +42,19 @@ app.post("/generate", async (request, response) => {
           'x-rapidapi-host': 'quotes88.p.rapidapi.com'
         }
     };      
-    let quoteUrl = 'https://quotes88.p.rapidapi.com/random';
-        
+    let quoteUrl = "";
+
+    if (rand == "on")
+        quoteUrl = 'https://quotes88.p.rapidapi.com/random';
+    else if (!isNaN(id) && Number(id) > 3)
+        quoteUrl = `https://quotes88.p.rapidapi.com/quotes/${id}`;
+    else 
+        quoteUrl = 'https://quotes88.p.rapidapi.com/random';
 
     const res = await fetch(quoteUrl, options);
     const json = await res.json()
     let quote = {quote: json.quote, quoteId: json.quoteId}
-    response.render("confirm", quote);
+    response.render("generatedQuote", quote);
         
     const client = new MongoClient(uri, { serverApi: ServerApiVersion.v1 });
     try {
@@ -89,18 +95,18 @@ app.get("/savedQuotes", async (request, response) => {
     } 
 });
 
-app.get("/removeAll", (request, response) => {
-    response.render("removeAll", {portNumber: portNumber});
+app.get("/clearHistory", (request, response) => {
+    response.render("clearHistory", {portNumber: portNumber});
 }); 
 
-app.post("/removeAll", async (request, response) => { 
+app.post("/clearHistory", async (request, response) => { 
     const client = new MongoClient(uri, { serverApi: ServerApiVersion.v1 });
     try {
         await client.connect();
         const result = await client.db(databaseAndCollection.db)
         .collection(databaseAndCollection.collection)
         .deleteMany({});
-        response.render("removeConfirm", {total: result.deletedCount})
+        response.render("clearConfirm", {total: result.deletedCount})
     } catch (e) {
         console.error(e);
     } finally {
@@ -110,7 +116,6 @@ app.post("/removeAll", async (request, response) => {
 });
 
 app.listen(portNumber);
-console.log(`Webserver started and running at http://localhost:${portNumber}`);
 
 const prompt = "Stop to shutdown the server:  ";
 process.stdout.write(prompt);
