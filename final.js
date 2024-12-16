@@ -27,7 +27,7 @@ app.get("/", (request, response) => {
 });
 
 app.get("/generate", (request, response) => {
-    response.render("generate", {portNumber: portNumber});
+    response.render("generate");
 }); 
 
 app.use(bodyParser.urlencoded({extended:false}));
@@ -68,7 +68,7 @@ app.post("/generate", async (request, response) => {
     }     
 });
 
-app.get("/savedQuotes", async (request, response) => { 
+app.get("/saved", async (request, response) => { 
     const client = new MongoClient(uri, { serverApi: ServerApiVersion.v1 });
     try {
         await client.connect();
@@ -78,15 +78,16 @@ app.get("/savedQuotes", async (request, response) => {
 
         const result = await cursor.toArray();
         let quotes = "<ul>";
-        if (result) {
-            for (let i of result) {        
-                quotes += `<li>Quote #${i.quoteId}: ${i.quote}</li>`
-            }
-            quotes += `</ul>`
-            response.render("saved", {quotes});   
-        } else {
-            response.render("saved", {quotes: "NONE"});    
+
+        for (let i of result) {        
+            quotes += `<li>Quote #${i.quoteId}: "${i.quote}"</li>`
         }
+        quotes += `</ul>`
+        if (quotes != "<ul></ul>")
+            response.render("saved", {quotes});   
+        else
+            response.render("saved", {quotes: "NONE"});   
+
     } catch (e) {
         console.error(e);
     } finally {
@@ -112,21 +113,3 @@ app.get("/clearConfirm", async (request, response) => {
 }); 
 
 app.listen(portNumber);
-
-// const prompt = "Stop to shutdown the server:  ";
-// process.stdout.write(prompt);
-// process.stdin.on("readable", function () {
-
-//   const dataInput = process.stdin.read();
-//   if (dataInput !== null) {
-//     const command = dataInput.trim();
-//     if (command.toLowerCase() === "stop") {
-//       process.stdout.write("Shutting down the server\n");
-//       process.exit(0);
-//     } else {
-//       process.stdout.write(`Invalid Command: ${dataInput}`);
-//     }
-//     process.stdout.write(prompt);
-//     process.stdin.resume();
-//   }
-// });
